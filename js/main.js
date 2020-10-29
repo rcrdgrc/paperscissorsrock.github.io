@@ -26,6 +26,32 @@ let choices;
 let winner;
 
 
+// cached element references ========================================
+const scoreEls = {
+  player: document.getElementById('p-score'),
+  computer: document.getElementById('c-score'),
+  tie: document.getElementById('t-score')
+}
+
+const choicesEl = {
+  player: {
+    borderEl: document.getElementById('p-result'),
+    imgEl: document.querySelector('#p-result img')
+  },
+  computer: {
+    borderEl: document.getElementById('c-result'),
+    imgEl: document.querySelector('#c-result img')
+  }
+}
+
+
+// event listeners ================================================================
+document.querySelector('button')
+  .addEventListener('click', playRound);
+
+
+init(); // initialize our state when the app loads in the browser
+
 function init(){
 
   scores = {
@@ -40,4 +66,14 @@ function init(){
   }
 
   winner = null; // who won? "player", "computer", or "tie"
+
+  render();
+}
+
+function render(){
+  console.log('render is firing')
+}
+
+function playRound(){
+  console.log('play round is firing on the click of my button')
 }
