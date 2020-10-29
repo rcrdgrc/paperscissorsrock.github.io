@@ -73,6 +73,9 @@ function init(){
   render();
 }
 
+
+// take our state (which our the variables we initialized in our init function)
+// and update the dom with those values
 function render(){
   console.log('render is firing')
 
@@ -92,12 +95,34 @@ function render(){
     //
     // console.log(choice) // things to log
     // console.log(choices[choice]) the value
+
+    // try and write the code that will update the dom with the 
+    // grey border based on the winner
+
+    // hint you can use an if/else or a ternary opertator ? :
+    choicesEl[choice].borderEl.style.borderColor = winner === choice ? 'grey': 'white';
+    // another way to do the above ^
+    // if(winner === choice){
+    //   choicesEl[choice].borderEl.style.borderColor = 'grey';
+    // } else {
+    //   choicesEl[choice].borderEl.style.borderColor = 'white';
+    // }
+
     choicesEl[choice].imgEl.src = rpsLookup[choices[choice]].imageUrl
   }
 }
 
+// any function that depends on an event listener
+/// all it does it it updates our state variables
+// ! important staty consitent with what you defined your values as
+// in your init function
+
+// then at the end you always call render, which will update the dom, with your new state
 function playRound(){
   console.log('play round is firing on the click of my button')
+  // its job is to just update state thats it, 
+  // don't touch the dom 
+
 
   // determine choice 
   // know whether the computer or user through paper scissors or rock
@@ -108,11 +133,23 @@ function playRound(){
 
 
   // determine the winner
-
-  // update state 
+  // if else if else 
+  if(choices.player === choices.computer){
+    // we have tie
+    winner = 'tie';
+  } else if(choices.computer === rpsLookup[choices.player].beats){
+    winner = 'player';
+  } else {
+    winner = 'computer';
+  }
+  // update state // what do want to update
   // update our score
-
+  scores[winner]++;
   // render
+
+  // this where we transfer the state we just updated to to the dom in the render function
+  // winner state, choices state, scores state
+  // we made sure our values stayed consistent with what we planned in our init function
   render();
 }
 
